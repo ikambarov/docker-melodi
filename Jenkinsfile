@@ -5,7 +5,7 @@ node("docker"){
 
     withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'REGISTRY_PASSWORD', usernameVariable: 'REGISTRY_USERNAME')]) {
         stage("Docker Build"){
-            sh "docker build -t ${REGISTRY_USERNAME}/melodi  ."
+            sh "docker build -t ${REGISTRY_USERNAME}/melodi:release-1.0  ."
         }
         
         stage("Docker Login"){
@@ -13,7 +13,7 @@ node("docker"){
         }
 
         stage("Docker Push"){
-            sh "docker push ${REGISTRY_USERNAME}/melodi"
+            sh "docker push ${REGISTRY_USERNAME}/melodi:release-1.0"
         }
     }
 }
