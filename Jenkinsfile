@@ -3,7 +3,7 @@ node("docker"){
         checkout scm
     }
 
-    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'REGISTRY_PASSWORD', usernameVariable: 'REGISTRY_USERNAME')]) {
+    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'REGISTRY_PASSWORD', usernameVariable: 'REGISTRY_USERNAME')]) {
         stage("Docker Build"){
             sh "docker build -t ${REGISTRY_USERNAME}/melodi  ."
         }
