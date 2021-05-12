@@ -1,3 +1,10 @@
+if(env.BRANCH_NAME == "master") {
+    tag = "latest"
+}
+else { 
+    tag = env.BRANCH_NAME
+}
+
 node("docker"){
     stage("Pull Repo"){
         checkout scm
@@ -5,7 +12,7 @@ node("docker"){
 
     withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'REGISTRY_PASSWORD', usernameVariable: 'REGISTRY_USERNAME')]) {
         stage("Docker Build"){
-            sh "docker build -t ${REGISTRY_USERNAME}/melodi:release-1.0  ."
+            sh "docker build -t ${REGISTRY_USERNAME}/melodi:${tag}  ."
         }
         
         stage("Docker Login"){
@@ -13,8 +20,7 @@ node("docker"){
         }
 
         stage("Docker Push"){
-            sh "docker push ${REGISTRY_USERNAME}/melodi:release-1.0"
+            sh "docker push ${REGISTRY_USERNAME}/melodi:${tag}"
         }
     }
 }
-
