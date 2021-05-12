@@ -22,5 +22,9 @@ node("docker"){
         stage("Docker Push"){
             sh "docker push ${REGISTRY_USERNAME}/melodi:${tag}"
         }
+
+        stage("Run melodi"){
+            build wait: false, propagate: false, job: 'manage-melodi', parameters: [string(name: 'IMAGE', value: "${REGISTRY_USERNAME}/melodi:${tag}")]
+        }
     }
 }
