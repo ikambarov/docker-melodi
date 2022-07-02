@@ -12,7 +12,7 @@ node('docker'){
             sh "docker build -t $DOCKERHUB_USER/melodi:${tag} ."
         }
 
-        stage("Build"){
+        stage("Push"){
             sh '''
                 docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
                 '''
