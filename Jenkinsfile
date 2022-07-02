@@ -1,6 +1,6 @@
 node('docker'){
-    stage("Test"){
+    stage("Build"){
         checkout scm
-        sh "ls"
+        sh "docker build -t test ."
     }
 }
