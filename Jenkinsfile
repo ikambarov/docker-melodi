@@ -1,4 +1,4 @@
-if(env.BRANCH_NAME == master){
+if(env.BRANCH_NAME == 'master'){
     tag = "latest"
 }
 else{
