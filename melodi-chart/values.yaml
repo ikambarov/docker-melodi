@@ -1,0 +1,7 @@
+namespace: web
+replicas: 3
+image: ikambarov/melodi
+tag: v1
+servicetype: LoadBalancer
+serviceport: 80
+port: 80
